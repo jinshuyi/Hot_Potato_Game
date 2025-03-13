@@ -1,37 +1,23 @@
 # TCP_Programming
  
-## Socket Overview
-
-**What should Server do:** 
-- Create a ServerSocket object and bind the listening port
-- Call the accept() method to monitor the client's request
-- After the connection is established, read the request information sent by the client through the input stream
-- Send response information to the client through the output stream
-- Close related resources
-
-**What should Client do:**
-- Create a Socket object, indicating the address and port number of the server to be linked
-- After the link is established, send request information to the server through the output stream
-- Get the server response information through the output stream
-- Close related resources
-
+## Socket Introduction
 ```mermaid
 sequenceDiagram
     participant S as Server
     participant C as Client
     autonumber
-    Note over S: Create ServerSocket
-    S-->>C: Wait for request
-    C->>S: Creat socket to request to connet
-    S-->>C: Accept connection on socket //accept()
-    rect rgb(200, 150, 255)
-    loop Messages
-        Note over S,C: InputStream
-        Note over S,C: outputStream
-        S-->C: Communication
+    Note over S: Initialize ServerSocket
+    S-->>C: Waits for incoming request
+    C->>S: Creates a socket to establish connection
+    S-->>C: Accepts the connection via socket //accept()
+    rect rgb(150, 200, 100)
+    loop Data Transmission
+        Note over S,C: InputStream Processing
+        Note over S,C: OutputStream Processing
+        S-->C: Exchange of Messages
     end
     end
-    S-->C: Close socket
+    S-->C: Terminates socket connection
 ```
 ## Implementation Description
 
