@@ -10,7 +10,7 @@ sequenceDiagram
     S-->>C: Waits for incoming connection requests
     C->>S: Creates a socket and attempts to connect
     S-->>C: Accepts the connection and establishes a link // accept()
-    rect rgb(100, 200, 250)
+    rect rgb(100, 220, 100)
     loop Data Exchange
         Note over S,C: Bidirectional Communication
         Note over S,C: Input/Output Streams
