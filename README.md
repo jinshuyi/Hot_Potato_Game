@@ -22,31 +22,36 @@ sequenceDiagram
 ```
 ## Implementation Description
 
-The game that will be modeled is called hot potato, in which there are some number of players who quickly toss a potato from one player to another until, at a random point, the game ends and the player holding the potato is “it”. The object is to not be the one holding the potato at the end of the game. In this assignment, you will create a ring of “player” processes that will pass the potato around. Thus, each player process has a left neighbor and a right neighbor. Also, there will be a “ringmaster” process that will start each game, report the results, and shut down the game.
+Implementation Overview
+This project simulates the game "Hot Potato," where multiple players pass a "potato" among themselves until the game stops at a random moment. The player holding the potato at that point is declared "it." The goal of the game is to avoid being the last player holding the potato.
 
-The game that you will work on follows the following process:
-1. To begin, the ringmaster creates a “potato” object initialized with some number of hops and sends the potato to a randomly selected player.
-2. Each time a player receives the potato, the player will decrement the number of hops and append the player’s ID (which is the id number assigned to each player as described in the Communication Machanism section below) to the potato. Then, this player who is holding the potato will choose next step based on the remaining number of hops as bellow:
-- If the remaining number of hops is greater than zero, the player will randomly select a neighbor and send the potato to that neighbor.
-- The game ends when the hop counter reaches zero. The player holding the potato sends it to the ringmaster, indicating the end of the game. The ringmaster prints a trace of the game to the screen (using the player identities that are appended to the potato), and shuts the game down (by sending a message to each player to indicate they may shut down as the game is over). 
+In this implementation, multiple "player" processes will be set up in a circular arrangement to pass the potato around. Each player has a neighboring player on both the left and right. Additionally, a "ringmaster" process is responsible for initializing the game, tracking the results, and shutting down the game once completed.
 
-The assignment is to create one ringmaster process and some number of player processes, then play a game and terminate all the processes gracefully. You may explicitly create each process from an interactive shell; however, the player processes must exit cleanly at the end of the game in response to commands from the ringmaster.
-	
-Based on the description above, the ringmaster side will be responsible for the following:
-1. Establish N network socket connections with N number of players and provide relevant
-information to each player (see Communication Machanism section below for details)
-2. Create a “potato” object as described above
-3. Randomly select a player and send the “potato” to the selected player
-4. At the end of the game (when the ringmaster receive the potato from the player who is
-“it”), print a trace of the potato to the screen
-5. Shut the game down by sending a message to each player
+## How the Game Works:
 
-The player side will be responsible for the following:
-1. Establish three network socket connections for communication:
-- with the player to the left
-- with the player to the right
-- with the ringmaster
-2. Keep listening to the three channels as “potato” can arrive on any of these three
-channels. Note that commands and important information may also be received from the
-ringmaster.
-3. Properly handle everything received based on game rules.
+1. The ringmaster begins by creating a "potato" object with a predefined number of hops and sends it to a randomly chosen player.
+
+2. When a player receives the potato:
+	The player decreases the hop counter and appends their unique player ID to the potato (each player ID is assigned according to the details in the Communication Mechanism section).
+	Depending on the remaining hops:
+		If there are still hops left, the player selects a neighbor at random and passes the potato to them.
+		If the hop count reaches zero, the game ends. The player holding the potato returns it to the ringmaster, signaling the game’s completion.
+
+3.The ringmaster logs the full sequence of the game (by printing the IDs recorded on the potato) and sends termination messages to all players so they can exit properly.
+
+The goal of the assignment is to design and execute a single ringmaster process along with multiple player processes. The processes should be initiated and terminated in a controlled manner, ensuring that all players exit cleanly after receiving shutdown instructions from the ringmaster.
+
+### Responsibilities of the Ringmaster
+Establish socket connections with N players and distribute relevant details to each (refer to the Communication Mechanism section for specifics).
+Create and initialize the "potato" object.
+Randomly select a player and send them the potato.
+When the game ends (i.e., the potato is returned to the ringmaster), display the game trace on the screen.
+Gracefully shut down the game by instructing all players to terminate.
+
+### Responsibilities of the Player
+Maintain three socket connections for communication:
+One with the left neighbor.
+One with the right neighbor.
+One with the ringmaster.
+Continuously listen on all three channels since the potato or game-related messages may arrive from any of them.
+Appropriately process received messages according to the game rules.
