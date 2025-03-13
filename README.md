@@ -3,21 +3,22 @@
 ## Socket Introduction
 ```mermaid
 sequenceDiagram
-    participant S as Server
-    participant C as Client
+    participant S as Server (Ringmaster)
+    participant C as Client (Player)
     autonumber
-    Note over S: Initialize ServerSocket
-    S-->>C: Waits for incoming request
-    C->>S: Creates a socket to establish connection
-    S-->>C: Accepts the connection via socket //accept()
-    rect rgb(150, 200, 100)
-    loop Data Transmission
-        Note over S,C: InputStream Processing
-        Note over S,C: OutputStream Processing
-        S-->C: Exchange of Messages
+    Note over S: Initialize and bind ServerSocket
+    S-->>C: Waits for incoming connection requests
+    C->>S: Creates a socket and attempts to connect
+    S-->>C: Accepts the connection and establishes a link // accept()
+    rect rgb(100, 200, 250)
+    loop Data Exchange
+        Note over S,C: Bidirectional Communication
+        Note over S,C: Input/Output Streams
+        S-->C: Sends and receives messages
     end
     end
-    S-->C: Terminates socket connection
+    S-->C: Closes connection upon game termination
+
 ```
 ## Implementation Description
 
