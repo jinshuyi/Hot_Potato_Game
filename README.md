@@ -1,6 +1,3 @@
-Here is the full **GitHub-compatible README** file with all sections formatted properly in Markdown:
-
-```markdown
 # TCP_Programming
 
 ## Overview of Socket Communication
@@ -124,69 +121,4 @@ Players shutting down...
 
 ---
 
-## Setup and Compilation
 
-### **Requirements**
-- A system with **Linux/macOS** (or WSL on Windows).
-- A **C/C++ compiler** with support for POSIX sockets.
-- Basic understanding of **network programming**.
-
-### **Compiling the Program**
-To compile the project, use:
-```bash
-gcc -o ringmaster ringmaster.c -pthread
-gcc -o player player.c -pthread
-```
-
-### **Running the Game**
-1. Start the ringmaster:
-   ```bash
-   ./ringmaster <port_number> <num_players> <num_hops>
-   ```
-   Example:
-   ```bash
-   ./ringmaster 5000 4 10
-   ```
-
-2. Start each player in separate terminals:
-   ```bash
-   ./player <ringmaster_host> <ringmaster_port>
-   ```
-   Example:
-   ```bash
-   ./player localhost 5000
-   ```
-
-Once all players are connected, the game will start automatically.
-
----
-
-## Notes & Considerations
-
-- **Graceful Termination**:  
-  - Players and the ringmaster should **close sockets properly** after the game ends to avoid memory leaks.
-- **Fault Tolerance**:  
-  - If a player unexpectedly disconnects, the game should handle it appropriately.
-- **Randomization**:  
-  - Players should randomly select neighbors to prevent predictable patterns.
-
----
-
-## License
-
-This project is open-source and distributed under the **MIT License**.
-
----
-
-This README file is **fully GitHub-compatible**, meaning you can **copy and paste** it directly into your `README.md` file. Let me know if you need any modifications! 🚀
-```
-
-This README is **formatted for GitHub**, fully structured, and includes:
-- **Proper Markdown headers**
-- **Syntax-highlighted code blocks**
-- **A sequence diagram**
-- **Step-by-step setup instructions**
-- **An example game output**
-- **A section for best practices**
-
-Let me know if you need any refinements! 🚀
