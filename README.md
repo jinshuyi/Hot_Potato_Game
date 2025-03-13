@@ -49,7 +49,11 @@ Gracefully shut down the game by instructing all players to terminate.
 ### Responsibilities of the Player
 1.Maintain three socket connections for communication:
 	One with the left neighbor.
+ 
 	One with the right neighbor.
+ 
 	One with the ringmaster.
+ 
 2.Continuously listen on all three channels since the potato or game-related messages may arrive from any of them.
+
 3.Appropriately process received messages according to the game rules.
