@@ -28,9 +28,7 @@ This project simulates the game "Hot Potato," where multiple players pass a "pot
 In this implementation, multiple "player" processes will be set up in a circular arrangement to pass the potato around. Each player has a neighboring player on both the left and right. Additionally, a "ringmaster" process is responsible for initializing the game, tracking the results, and shutting down the game once completed.
 
 ## How the Game Works:
-
 1. The ringmaster begins by creating a "potato" object with a predefined number of hops and sends it to a randomly chosen player.
-
 2. When a player receives the potato:
 	The player decreases the hop counter and appends their unique player ID to the potato (each player ID is assigned according to the details in the Communication Mechanism section).
 	Depending on the remaining hops:
@@ -49,9 +47,9 @@ When the game ends (i.e., the potato is returned to the ringmaster), display the
 Gracefully shut down the game by instructing all players to terminate.
 
 ### Responsibilities of the Player
-Maintain three socket connections for communication:
-One with the left neighbor.
-One with the right neighbor.
-One with the ringmaster.
-Continuously listen on all three channels since the potato or game-related messages may arrive from any of them.
-Appropriately process received messages according to the game rules.
+1.Maintain three socket connections for communication:
+	One with the left neighbor.
+	One with the right neighbor.
+	One with the ringmaster.
+2.Continuously listen on all three channels since the potato or game-related messages may arrive from any of them.
+3.Appropriately process received messages according to the game rules.
